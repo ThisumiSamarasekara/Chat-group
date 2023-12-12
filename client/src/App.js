@@ -3,6 +3,7 @@ import "./App.css";
 import io from "socket.io-client";
 import Chat from "./Chat";
 
+//Establish a WebSocket connection to the server running at http://localhost:3001 using the io.connect method
 const socket = io.connect("http://localhost:3001");
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
 
+  //It checks if both username and room are not empty, emits a join_room event to the server with the room ID, and sets showChat to true.
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join_room", room);

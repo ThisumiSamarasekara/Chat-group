@@ -6,6 +6,8 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
+  //function sendMessage that sends a message to the server when the "Send" button is clicked.
+  //It emits a send_message event to the server with message data, updates the messageList state, and resets the currentMessage
   const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -21,6 +23,8 @@ function Chat({ socket, username, room }) {
     }
   };
 
+  //UseEffect hook to listen for the receive_message event from the server.
+  //When a message is received, update the messageList state with the new message
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
